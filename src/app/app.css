@@ -104,19 +104,23 @@
  }
 
  .BotN {
+
   width: 250.00px;
   height: 100.00px;
   background: linear-gradient(0deg, rgba(23, 7, 246, 0.2) 0%, rgba(21, 248, 4, 0.2) 100%), #2B2CF5;
   border-radius: 47px;
   justify-content: center;
   flex-direction: column;
-  font-size: 38px;
-  font-family: Roboto;
+  word-wrap: break-word;
+
+  /* Estilo_Titulo_Morado */
+  font-family: var(--Static-Label-Large-Font, Roboto);
+  font-size: 48px;
+  font-style: normal;
   font-weight: 600;
   color: #ffffff;
-  line-height: 20px;
-  letter-spacing: 0.10px;
-  word-wrap: break-word;
+  line-height: var(--Static-Label-Large-Line-Height, 20px); /* 41.667% */
+  letter-spacing: var(--Static-Label-Large-Tracking, 0.1px);
  }
 
   /* ------  el # "Gatito" hace referencia al Identificador ( id )  -------------------   */
