@@ -140,23 +140,23 @@
  }
 
  #divFoto{
-    position: absolute;
+    /* position: absolute;
     width: 240px;
     height: 500px;
     left: 42px;
     top: 25px;
-   background: url(.jpg), #c4c4c4;
+   background: url(.jpg), #c4c4c4; */
 }
 
 
- #imgFoto {
+ /* #imgFoto {
      position: relative;
      width: 206px;
      height: 250px;
      left: 20px;
      top: 25px;
      background: url(.jpg), #C4C4C4;
- }
+ } */
 
 
  #lblNombreUnico {
