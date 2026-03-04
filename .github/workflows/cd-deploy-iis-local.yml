@@ -28,13 +28,13 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Determine dist folder (best-effort)
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Artifact content:"
           Get-ChildItem -Recurse -Depth 3 _artifact | Select-Object FullName
 
       - name: Deploy files to IIS directory
-        shell: pwsh
+        shell: powershell
         run: |
           $Target = "C:\inetpub\wwwroot\LoginHM"
           New-Item -ItemType Directory -Force -Path $Target | Out-Null
@@ -64,7 +64,7 @@ jobs:
           }
 
       - name: Add web.config for Angular SPA routes (IIS rewrite)
-        shell: pwsh
+        shell: powershell
         run: |
           $Target = "C:\inetpub\wwwroot\LoginHM"
           $WebConfigPath = Join-Path $Target "web.config"
