@@ -36,7 +36,7 @@ jobs:
       - name: Deploy files to IIS directory
         shell: powershell
         run: |
-          $Target = "C:\inetpub\wwwroot\LoginHM"
+          $Target = "D:\CI_DI_LoginHM"
           New-Item -ItemType Directory -Force -Path $Target | Out-Null
 
           # Limpia destino (opcional). OJO si tienes otros archivos ahí.
@@ -66,7 +66,7 @@ jobs:
       - name: Add web.config for Angular SPA routes (IIS rewrite)
         shell: powershell
         run: |
-          $Target = "C:\inetpub\wwwroot\LoginHM"
+          $Target = "D:\CI_DI_LoginHM"
           $WebConfigPath = Join-Path $Target "web.config"
 
           $lines = @(
