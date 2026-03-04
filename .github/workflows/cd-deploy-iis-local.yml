@@ -1,0 +1,89 @@
+name: CD - Deploy to Local IIS (self-hosted)
+
+on:
+  workflow_run:
+    workflows: ["CI - Build Angular"]
+    types: [completed]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    # Requiere que tu runner Windows esté activo
+    runs-on: [self-hosted, windows]
+    permissions:
+      actions: read
+
+    # Evita desplegar si el build falló (cuando viene desde workflow_run)
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: angular-dist
+          path: _artifact
+
+      - name: Determine dist folder (best-effort)
+        shell: powershell
+        run: |
+          Write-Host "Artifact content:"
+          Get-ChildItem -Recurse -Depth 3 _artifact | Select-Object FullName
+
+      - name: Deploy files to IIS directory
+        shell: powershell
+        run: |
+          $Target = "C:\inetpub\wwwroot\LoginHM"
+          New-Item -ItemType Directory -Force -Path $Target | Out-Null
+
+          # Limpia destino (opcional). OJO si tienes otros archivos ahí.
+          if (Test-Path $Target) {
+            Get-ChildItem -Path $Target -Force | Remove-Item -Recurse -Force
+          }
+
+          # Copia dist. Ajuste típico: Angular queda en dist/<app-name> o dist/<app-name>/browser
+          # 1) si existe dist/*/browser, usarlo
+          $browser = Get-ChildItem -Path "_artifact\dist" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+            Join-Path $_.FullName "browser"
+          } | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+          if ($browser) {
+            Copy-Item -Path (Join-Path $browser "*") -Destination $Target -Recurse -Force
+            Write-Host "Deployed from: $browser"
+          }
+          else {
+            # 2) si no, copiar dist/<app-name> (primer directorio dentro de dist)
+            $appDist = Get-ChildItem -Path "_artifact\dist" -Directory | Select-Object -First 1
+            if (-not $appDist) { throw "No app dist folder found under _artifact\dist" }
+
+            Copy-Item -Path (Join-Path $appDist.FullName "*") -Destination $Target -Recurse -Force
+            Write-Host "Deployed from: $($appDist.FullName)"
+          }
+
+      - name: Add web.config for Angular SPA routes (IIS rewrite)
+        shell: powershell
+        run: |
+          $Target = "C:\inetpub\wwwroot\LoginHM"
+          $WebConfigPath = Join-Path $Target "web.config"
+
+          @"
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Angular Routes" stopProcessing="true">
+          <match url=".*" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/index.html" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
+"@ | Out-File -FilePath $WebConfigPath -Encoding utf8 -Force
+
+          Write-Host "web.config written to $WebConfigPath"
