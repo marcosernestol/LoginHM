@@ -44,24 +44,46 @@ jobs:
             Get-ChildItem -Path $Target -Force | Remove-Item -Recurse -Force
           }
 
-          # Copia dist. Ajuste típico: Angular queda en dist/<app-name> o dist/<app-name>/browser
-          # 1) si existe dist/*/browser, usarlo
-          $browser = Get-ChildItem -Path "_artifact\dist" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-            Join-Path $_.FullName "browser"
-          } | Where-Object { Test-Path $_ } | Select-Object -First 1
+          $ArtifactRoot = "_artifact"
 
-          if ($browser) {
-            Copy-Item -Path (Join-Path $browser "*") -Destination $Target -Recurse -Force
-            Write-Host "Deployed from: $browser"
-          }
-          else {
-            # 2) si no, copiar dist/<app-name> (primer directorio dentro de dist)
-            $appDist = Get-ChildItem -Path "_artifact\dist" -Directory | Select-Object -First 1
-            if (-not $appDist) { throw "No app dist folder found under _artifact\dist" }
+          # Caso A: el artifact contiene dist/ (layout clásico)
+          if (Test-Path (Join-Path $ArtifactRoot "dist")) {
+            $distRoot = Join-Path $ArtifactRoot "dist"
+
+            # 1) dist/*/browser
+            $browser = Get-ChildItem -Path $distRoot -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+              Join-Path $_.FullName "browser"
+            } | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+            if ($browser) {
+              Copy-Item -Path (Join-Path $browser "*") -Destination $Target -Recurse -Force
+              Write-Host "Deployed from: $browser"
+              exit 0
+            }
+
+            # 2) dist/<app-name> (primer directorio dentro de dist)
+            $appDist = Get-ChildItem -Path $distRoot -Directory | Select-Object -First 1
+            if (-not $appDist) { throw "No app dist folder found under $distRoot" }
 
             Copy-Item -Path (Join-Path $appDist.FullName "*") -Destination $Target -Recurse -Force
             Write-Host "Deployed from: $($appDist.FullName)"
+            exit 0
           }
+
+          # Caso B: el artifact NO trae dist/ (tu caso actual: _artifact/<app>/browser)
+          $appRoot = Get-ChildItem -Path $ArtifactRoot -Directory | Select-Object -First 1
+          if (-not $appRoot) { throw "No app folder found under $ArtifactRoot" }
+
+          $browserPath = Join-Path $appRoot.FullName "browser"
+          if (Test-Path $browserPath) {
+            Copy-Item -Path (Join-Path $browserPath "*") -Destination $Target -Recurse -Force
+            Write-Host "Deployed from: $browserPath"
+            exit 0
+          }
+
+          # Si no hay browser/, copia todo el contenido de la carpeta de app
+          Copy-Item -Path (Join-Path $appRoot.FullName "*") -Destination $Target -Recurse -Force
+          Write-Host "Deployed from: $($appRoot.FullName)"
 
       - name: Add web.config for Angular SPA routes (IIS rewrite)
         shell: powershell
