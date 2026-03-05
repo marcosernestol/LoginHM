@@ -85,8 +85,9 @@
  }
 
 
+  /* Este estilo y Color de letra es el que utilizo como ejemplo para el Artefacto  */
  .TxtStyleCaptura{
-    color: rgb(34, 6, 246);
+    color: rgb(246, 6, 206);
     font-size: 32px;
     font-family: Roboto;
     font-weight: 400;
@@ -139,14 +140,14 @@
      color: #000000;
  }
 
- #divFoto{
-    /* position: absolute;
+/* #divFoto{
+     position: absolute;
     width: 240px;
     height: 500px;
     left: 42px;
     top: 25px;
-   background: url(.jpg), #c4c4c4; */
-}
+   background: url(.jpg), #c4c4c4;
+} */
 
 
  /* #imgFoto {
