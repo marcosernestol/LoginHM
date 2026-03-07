@@ -23,6 +23,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "global_imagenes",
+                "output": "global_imagenes"
               }
             ],
             "styles": [
