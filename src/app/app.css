@@ -107,7 +107,7 @@
  .BotN {
 
   width: 250.00px;
-  height: 100.00px;
+  height: 80.00px;
   background: linear-gradient(0deg, rgba(23, 7, 246, 0.2) 0%, rgba(21, 248, 4, 0.2) 100%), #2B2CF5;
   border-radius: 47px;
   justify-content: center;
@@ -246,12 +246,12 @@
  #botonGuardar {
      position: relative;
      left: 50px;
-     top: 600px;
+     top: 400px;
 
  }
 
  #botonCancelar {
      position: relative;
      left: 100px;
-     top: 600px;
+     top: 400px;
  }
