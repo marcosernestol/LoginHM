@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
   private readonly formBuilder = inject(FormBuilder);
 
@@ -36,6 +37,8 @@ export class App {
     this.submitted = true;
 
     if (this.loginForm.invalid) {
+          console.log('LoginHM Invàlido');
+          alert('LoginHM Válido');
       return;
     }
 
