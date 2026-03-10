@@ -1,0 +1,932 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>login-hm documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">login-hm documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  App</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/app.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-root</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./app.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./app.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#formBuilder" >formBuilder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loginForm" >loginForm</a>
+                            </li>
+                            <li>
+                                <a href="#submitted" >submitted</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cancelar" >cancelar</a>
+                            </li>
+                            <li>
+                                <a href="#guardarFormulario" >guardarFormulario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#nombreUnicoControl" >nombreUnicoControl</a>
+                                </li>
+                                <li>
+                                    <a href="#correoElectronicoControl" >correoElectronicoControl</a>
+                                </li>
+                                <li>
+                                    <a href="#passwordControl" >passwordControl</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelar"></a>
+                    <span class="name">
+                        <span ><b>cancelar</b></span>
+                        <a href="#cancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/app.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Limpia el formulario y reinicia el estado visual de validacion.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p><code>void</code></p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarFormulario"></a>
+                    <span class="name">
+                        <span ><b>guardarFormulario</b></span>
+                        <a href="#guardarFormulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardarFormulario()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/app.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Procesa el envio del formulario.</p>
+<p>Marca el formulario como enviado, valida campos y, si es valido,
+construye el payload para procesarlo (API, servicio, etc.).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p><code>void</code></p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>formBuilder</b></span>
+                        <a href="#formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/app.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loginForm"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loginForm</b></span>
+                        <a href="#loginForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.formBuilder.nonNullable.group({
+    nombreUnico: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+    correoElectronico: [&#x27;&#x27;, [Validators.required, Validators.email]],
+    password: [&#x27;&#x27;, [Validators.required, Validators.minLength(6)]],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/app.ts:36</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo principal del login.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitted"></a>
+                    <span class="name">
+                        <span ><b>submitted</b></span>
+                        <a href="#submitted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/app.ts:27</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica si el usuario ya intento enviar el formulario.
+Se usa para mostrar errores de validacion en la vista.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nombreUnicoControl"></a>
+                        <span class="name"><b>nombreUnicoControl</b><a href="#nombreUnicoControl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>nombreUnicoControl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/app.ts:43</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve el control del campo <code>nombreUnico</code> para validaciones en template.</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="correoElectronicoControl"></a>
+                        <span class="name"><b>correoElectronicoControl</b><a href="#correoElectronicoControl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>correoElectronicoControl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/app.ts:48</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve el control del campo <code>correoElectronico</code> para validaciones en template.</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="passwordControl"></a>
+                        <span class="name"><b>passwordControl</b><a href="#passwordControl"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>passwordControl()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/app.ts:53</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve el control del campo <code>password</code> para validaciones en template.</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { ReactiveFormsModule, FormBuilder, Validators } from &#x27;@angular/forms&#x27;;
+
+@Component({
+  selector: &#x27;app-root&#x27;,
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: &#x27;./app.html&#x27;,
+  styleUrl: &#x27;./app.css&#x27;
+})
+
+/**
+ * Componente raiz de LoginHM.
+ *
+ * @remarks
+ * Este es un buen lugar para documentar el objetivo del componente,
+ * dependencias principales y reglas de negocio relevantes.
+ */
+export class App {
+  private readonly formBuilder &#x3D; inject(FormBuilder);
+
+  /**
+   * Indica si el usuario ya intento enviar el formulario.
+   * Se usa para mostrar errores de validacion en la vista.
+   */
+  submitted &#x3D; false;
+
+  /**
+   * Formulario reactivo principal del login.
+   *
+   * @property nombreUnico - Nombre de usuario unico (minimo 3 caracteres).
+   * @property correoElectronico - Correo con formato valido.
+   * @property password - Contrasena (minimo 6 caracteres).
+   */
+  readonly loginForm &#x3D; this.formBuilder.nonNullable.group({
+    nombreUnico: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+    correoElectronico: [&#x27;&#x27;, [Validators.required, Validators.email]],
+    password: [&#x27;&#x27;, [Validators.required, Validators.minLength(6)]],
+  });
+
+  /** Devuelve el control del campo &#x60;nombreUnico&#x60; para validaciones en template. */
+  get nombreUnicoControl() {
+    return this.loginForm.controls.nombreUnico;
+  }
+
+  /** Devuelve el control del campo &#x60;correoElectronico&#x60; para validaciones en template. */
+  get correoElectronicoControl() {
+    return this.loginForm.controls.correoElectronico;
+  }
+
+  /** Devuelve el control del campo &#x60;password&#x60; para validaciones en template. */
+  get passwordControl() {
+    return this.loginForm.controls.password;
+  }
+
+  /**
+   * Procesa el envio del formulario.
+   *
+   * @returns &#x60;void&#x60;
+   * @remarks
+   * Marca el formulario como enviado, valida campos y, si es valido,
+   * construye el payload para procesarlo (API, servicio, etc.).
+   */
+  guardarFormulario(): void {
+    this.submitted &#x3D; true;
+
+    if (this.loginForm.invalid) {
+          console.log(&#x27;LoginHM Invàlido&#x27;);
+          alert(&#x27;LoginHM Invàlido&#x27;);
+      return;
+    }
+
+    const payload &#x3D; this.loginForm.getRawValue();
+    console.log(&#x27;Login válido:&#x27;, payload);
+    alert(&#x27;LoginHM: formulario válido.&#x27;);
+  }
+
+  /**
+   * Limpia el formulario y reinicia el estado visual de validacion.
+   *
+   * @returns &#x60;void&#x60;
+   */
+  cancelar(): void {
+    this.loginForm.reset({
+      nombreUnico: &#x27;&#x27;,
+      correoElectronico: &#x27;&#x27;,
+      password: &#x27;&#x27;,
+    });
+    this.submitted &#x3D; false;
+  }
+}
+
+
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;!-- Template del componente principal. En Angular no se usa &lt;body&gt;, &lt;link&gt; o &lt;script&gt; aqui. --&gt;
+
+&lt;!-- Para Corer Este proyecto Angular Utilizar: ng serve -o
+Pero NO utuilizar el Live Server de Visual Studio Code ,
+porque no va a funcionar , ya que Angular tiene su propio
+servidor de desarrollo y no es compatible con el Live Server
+de Visual Studio Code. --&gt;
+
+&lt;header&gt;
+    &lt;img
+        src&#x3D;&quot;/global_imagenes/logo.png&quot;
+        alt&#x3D;&quot;Logo&quot;
+        id&#x3D;&quot;frameLogo&quot;
+        /&gt;
+    &lt;img
+        class&#x3D;&quot;perfilUsuario&quot;
+        src&#x3D;&quot;/global_imagenes/perfilUsuario.png&quot;
+        alt&#x3D;&quot;Perfil de usuario&quot;
+        id&#x3D;&quot;framePerfilUsuario&quot;
+    /&gt;
+&lt;/header&gt;
+
+
+&lt;nav class&#x3D;&quot;menuInicial&quot;&gt;
+   &lt;ul&gt;
+      &lt;li&gt;&lt;a href&#x3D;&quot;index.html&quot;&gt;Inicial&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href&#x3D;&quot;./pagina2/pagina2.html&quot;&gt;Pagina2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href&#x3D;&quot;./OpenLayers_WebMap/mapa.html&quot;&gt;Mi Mapa&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+
+&lt;section&gt;
+    &lt;div  data-layer&#x3D;&quot;Rectangle 20&quot;
+          class&#x3D;&quot;Rectangle20&quot;&gt;
+
+        &lt;form id&#x3D;&quot;primerFormulario&quot;
+              [formGroup]&#x3D;&quot;loginForm&quot;
+              (ngSubmit)&#x3D;&quot;guardarFormulario()&quot;
+              novalidate&gt;
+            &lt;!-- EL método POST muestra datos en URL , el onsubmit &#x3D; &quot;return false;&quot;
+                 lo puse para que NO redireccione a otra página al presionar el boton guardar --&gt;
+
+
+          &lt;!-- ESTOS SON LOS BOTONES;  IMPORTANTE EL BOTON DE ENVIAR EL type DEBE SER submit  --&gt;
+          &lt;button type&#x3D;&quot;submit&quot;
+                  id&#x3D;&quot;botonGuardar&quot;
+                  class&#x3D;&quot;BotN&quot;&gt;Guardar
+            &lt;/button&gt;
+
+          &lt;button type&#x3D;&quot;button&quot;
+                  id&#x3D;&quot;botonCancelar&quot;
+                  class&#x3D;&quot;BotN&quot;
+                  (click)&#x3D;&quot;cancelar()&quot;&gt;Cancelar
+            &lt;/button&gt;
+
+
+            &lt;!-- ESTAS SON LAS ETIQUETAS Y CAJAS DE CAPTURA DE DATOS  --&gt;
+            &lt;label for&#x3D;&quot;inputNombreUnico&quot;
+                  id&#x3D;&quot;lblNombreUnico&quot;
+                  class&#x3D;&quot;miLabelStyle1&quot;
+                  &gt;
+                Usuario
+                &lt;span id&#x3D;&quot;errorNombreUnico&quot;
+                      class&#x3D;&quot;error&quot;&gt;
+                       @if (submitted &amp;&amp; nombreUnicoControl.invalid){*}
+                &lt;/span&gt;
+            &lt;/label&gt;
+
+            &lt;input
+                type&#x3D;&quot;text&quot;
+                name&#x3D;&quot;nombreUnico&quot;
+                id&#x3D;&quot;inputNombreUnico&quot;
+                class&#x3D;&quot;RoundedRectangle TxtStyleCaptura&quot;
+                formControlName&#x3D;&quot;nombreUnico&quot;
+            /&gt;
+
+            &lt;label for&#x3D;&quot;inputCorreoElectronico&quot;
+                  id&#x3D;&quot;lblEmail&quot;
+                  class&#x3D;&quot;miLabelStyle1&quot;&gt;
+                E-mail
+                &lt;span id&#x3D;&quot;errorCorreoElectronico&quot;
+                  class&#x3D;&quot;error&quot;&gt;
+                    @if (submitted &amp;&amp; correoElectronicoControl.invalid) {*}
+                &lt;/span&gt;
+            &lt;/label&gt;
+
+            &lt;input
+                type&#x3D;&quot;email&quot;
+                name&#x3D;&quot;correoElectronico&quot;
+                id&#x3D;&quot;inputCorreoElectronico&quot;
+                class&#x3D;&quot;RoundedRectangle TxtStyleCaptura&quot;
+                formControlName&#x3D;&quot;correoElectronico&quot;
+            /&gt;
+
+            &lt;label for&#x3D;&quot;inputPassword&quot;
+                  id&#x3D;&quot;lblPassword&quot;
+                  class&#x3D;&quot;miLabelStyle1&quot;&gt;
+                Contraseña
+                &lt;span id&#x3D;&quot;errorPassword&quot;
+                      class&#x3D;&quot;error&quot;&gt;
+                        @if (submitted &amp;&amp; passwordControl.invalid) {*}
+                &lt;/span&gt;
+            &lt;/label&gt;
+
+            &lt;input
+                type&#x3D;&quot;password&quot;
+                name&#x3D;&quot;password&quot;
+                id&#x3D;&quot;inputPassword&quot;
+                autocomplete&#x3D;&quot;current-password&quot;
+                class&#x3D;&quot;RoundedRectangle TxtStyleCaptura&quot;
+                formControlName&#x3D;&quot;password&quot;
+            /&gt;
+
+          &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;footer&gt;&lt;/footer&gt;
+
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- Template del componente principal. En Angular no se usa <body>, <link> o <script> aqui. --><!-- Para Corer Este proyecto Angular Utilizar: ng serve -oPero NO utuilizar el Live Server de Visual Studio Code ,porque no va a funcionar , ya que Angular tiene su propioservidor de desarrollo y no es compatible con el Live Serverde Visual Studio Code. --><header>    <img        src="/global_imagenes/logo.png"        alt="Logo"        id="frameLogo"        />    <img        class="perfilUsuario"        src="/global_imagenes/perfilUsuario.png"        alt="Perfil de usuario"        id="framePerfilUsuario"    /></header><nav class="menuInicial">   <ul>      <li><a href="index.html">Inicial</a></li>      <li><a href="./pagina2/pagina2.html">Pagina2</a></li>      <li><a href="./OpenLayers_WebMap/mapa.html">Mi Mapa</a></li>  </ul></nav><section>    <div  data-layer="Rectangle 20"          class="Rectangle20">        <form id="primerFormulario"              [formGroup]="loginForm"              (ngSubmit)="guardarFormulario()"              novalidate>            <!-- EL método POST muestra datos en URL , el onsubmit = "return false;"                 lo puse para que NO redireccione a otra página al presionar el boton guardar -->          <!-- ESTOS SON LOS BOTONES;  IMPORTANTE EL BOTON DE ENVIAR EL type DEBE SER submit  -->          <button type="submit"                  id="botonGuardar"                  class="BotN">Guardar            </button>          <button type="button"                  id="botonCancelar"                  class="BotN"                  (click)="cancelar()">Cancelar            </button>            <!-- ESTAS SON LAS ETIQUETAS Y CAJAS DE CAPTURA DE DATOS  -->            <label for="inputNombreUnico"                  id="lblNombreUnico"                  class="miLabelStyle1"                  >                Usuario                <span id="errorNombreUnico"                      class="error">                       @if (submitted && nombreUnicoControl.invalid){*}                </span>            </label>            <input                type="text"                name="nombreUnico"                id="inputNombreUnico"                class="RoundedRectangle TxtStyleCaptura"                formControlName="nombreUnico"            />            <label for="inputCorreoElectronico"                  id="lblEmail"                  class="miLabelStyle1">                E-mail                <span id="errorCorreoElectronico"                  class="error">                    @if (submitted && correoElectronicoControl.invalid) {*}                </span>            </label>            <input                type="email"                name="correoElectronico"                id="inputCorreoElectronico"                class="RoundedRectangle TxtStyleCaptura"                formControlName="correoElectronico"            />            <label for="inputPassword"                  id="lblPassword"                  class="miLabelStyle1">                Contraseña                <span id="errorPassword"                      class="error">                        @if (submitted && passwordControl.invalid) {*}                </span>            </label>            <input                type="password"                name="password"                id="inputPassword"                autocomplete="current-password"                class="RoundedRectangle TxtStyleCaptura"                formControlName="password"            />          </form>    </div></section><footer></footer></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'App'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'App.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
