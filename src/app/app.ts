@@ -1,13 +1,14 @@
 
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { AgentApiService } from './agent-api.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 /**
@@ -19,12 +20,16 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
  */
 export class App {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly agentApiService = inject(AgentApiService);
 
   /**
    * Indica si el usuario ya intento enviar el formulario.
    * Se usa para mostrar errores de validacion en la vista.
    */
   submitted = false;
+  readonly agentLoading = signal(false);
+  readonly agentReply = signal('');
+  readonly agentError = signal('');
 
   /**
    * Formulario reactivo principal del login.
@@ -37,6 +42,7 @@ export class App {
     nombreUnico: ['', [Validators.required, Validators.minLength(3)]],
     correoElectronico: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    agentPrompt: ['', [Validators.required, Validators.minLength(3)]],
   });
 
   /** Devuelve el control del campo `nombreUnico` para validaciones en template. */
@@ -52,6 +58,10 @@ export class App {
   /** Devuelve el control del campo `password` para validaciones en template. */
   get passwordControl() {
     return this.loginForm.controls.password;
+  }
+
+  get agentPromptControl() {
+    return this.loginForm.controls.agentPrompt;
   }
 
   /**
@@ -86,8 +96,48 @@ export class App {
       nombreUnico: '',
       correoElectronico: '',
       password: '',
+      agentPrompt: '',
     });
     this.submitted = false;
+    this.agentReply.set('');
+    this.agentError.set('');
+  }
+
+  enviarAlAgente(): void {
+    const prompt = this.agentPromptControl.value.trim();
+
+    if (!prompt) {
+      this.agentError.set('Escribe un mensaje para el agente.');
+      this.agentReply.set('');
+      return;
+    }
+
+    this.agentLoading.set(true);
+    this.agentError.set('');
+
+    this.agentApiService.invoke(prompt).subscribe({
+      next: (response) => {
+        if (!response.ok) {
+          this.agentReply.set('');
+          this.agentError.set(response.message || 'No fue posible obtener respuesta del agente.');
+          this.agentLoading.set(false);
+          return;
+        }
+
+        this.agentReply.set(response.reply || '(El agente no devolvio texto)');
+        this.agentLoading.set(false);
+      },
+      error: (error) => {
+        const message =
+          error?.error?.message ||
+          error?.error?.detail ||
+          'Error de conexion con el backend del agente.';
+
+        this.agentReply.set('');
+        this.agentError.set(message);
+        this.agentLoading.set(false);
+      },
+    });
   }
 }
 

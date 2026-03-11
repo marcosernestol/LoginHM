@@ -113,6 +113,47 @@ de Visual Studio Code. -->
                 formControlName="password"
             />
 
+              <label for="inputAgentPrompt"
+                  id="lblAgentPrompt"
+                  class="miLabelStyle1">
+                Mensaje al agente
+                <span id="errorAgentPrompt"
+                    class="error">
+                    @if (agentPromptControl.invalid && (submitted || agentPromptControl.touched)) {*}
+                </span>
+              </label>
+
+              <textarea
+                name="agentPrompt"
+                id="inputAgentPrompt"
+                class="RoundedRectangle TxtStyleCaptura"
+                formControlName="agentPrompt"
+                rows="3"
+              ></textarea>
+
+              <button
+                type="button"
+                id="botonAgente"
+                class="BotN"
+                (click)="enviarAlAgente()"
+                [disabled]="agentLoading()"
+              >
+                @if (agentLoading()) {
+                  Consultando...
+                } @else {
+                  Probar agente
+                }
+              </button>
+
+              <div id="agentRespuesta" class="agentRespuesta">
+                @if (agentError()) {
+                  <p class="errorTexto">{{ agentError() }}</p>
+                }
+                @if (agentReply()) {
+                  <p>{{ agentReply() }}</p>
+                }
+              </div>
+
           </form>
     </div>
 </section>

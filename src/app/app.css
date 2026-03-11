@@ -223,6 +223,24 @@
   border: 1px rgba(0, 0, 0, 0.20) solid;
  }
 
+ #lblAgentPrompt {
+     color: #000000;
+     width: 360px;
+     left: 85px;
+     top: 365px;
+     position: absolute;
+ }
+
+ #inputAgentPrompt {
+    left: 83.38px;
+    top: 406px;
+    position: absolute;
+    width: 460.24px;
+    height: 90px;
+    resize: none;
+    padding: 10px;
+ }
+
  #txtareaDomicilio {
      position: absolute;
      width: 325px;
@@ -254,4 +272,31 @@
      position: relative;
      left: 100px;
      top: 400px;
+ }
+
+ #botonAgente {
+     position: absolute;
+     width: 250px;
+     height: 65px;
+     left: 83px;
+     top: 525px;
+     font-size: 30px;
+ }
+
+ .agentRespuesta {
+     position: absolute;
+     left: 83px;
+     top: 605px;
+     width: 460px;
+     min-height: 80px;
+     background: #ffffff;
+     border: 1px solid rgba(0, 0, 0, 0.2);
+     border-radius: 12px;
+     padding: 12px;
+     overflow: auto;
+ }
+
+ .errorTexto {
+    color: #b00020;
+    margin: 0;
  }
