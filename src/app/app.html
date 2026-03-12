@@ -35,6 +35,58 @@ de Visual Studio Code. -->
     <div  data-layer="Rectangle 20"
           class="Rectangle20">
 
+      @if (usuarioAutenticado()) {
+        <div class="pantallaBienvenida">
+          <label id="lblBienvenidaUsuario" class="miLabelStyle1">Bienvenido {{ usuarioAutenticado() }}</label>
+
+          <div class="agenteBienvenida" [formGroup]="loginForm">
+            <label for="inputGooglePrompt" id="lblGooglePrompt" class="miLabelStyle1">
+              Agente LangChain (Google)
+            </label>
+
+            <textarea
+              name="googlePrompt"
+              id="inputGooglePrompt"
+              class="RoundedRectangle TxtStyleCaptura"
+              formControlName="googlePrompt"
+              rows="3"
+            ></textarea>
+
+            <button
+              type="button"
+              id="botonGoogleAgente"
+              class="BotN"
+              (click)="enviarAGoogleLangChain()"
+              [disabled]="googleLoading()"
+            >
+              @if (googleLoading()) {
+                Consultando...
+              } @else {
+                Probar agente Google
+              }
+            </button>
+
+            <div id="googleAgentRespuesta" class="agentRespuesta">
+              @if (googleError()) {
+                <p class="errorTexto">{{ googleError() }}</p>
+              }
+              @if (googleReply()) {
+                <p>{{ googleReply() }}</p>
+              }
+            </div>
+          </div>
+
+          <button
+            type="button"
+            id="botonCerrarSesion"
+            class="BotN"
+            (click)="cerrarSesion()"
+          >
+            Cerrar sesion
+          </button>
+        </div>
+      } @else {
+
         <form id="primerFormulario"
               [formGroup]="loginForm"
               (ngSubmit)="guardarFormulario()"
@@ -46,8 +98,14 @@ de Visual Studio Code. -->
           <!-- ESTOS SON LOS BOTONES;  IMPORTANTE EL BOTON DE ENVIAR EL type DEBE SER submit  -->
           <button type="submit"
                   id="botonGuardar"
-                  class="BotN">Guardar
-            </button>
+                  class="BotN"
+                  [disabled]="loginLoading()">
+                  @if (loginLoading()) {
+                    Validando...
+                  } @else {
+                    Guardar
+                  }
+          </button>
 
           <button type="button"
                   id="botonCancelar"
@@ -113,21 +171,31 @@ de Visual Studio Code. -->
                 formControlName="password"
             />
 
+
+
+          </form>
+
+        @if (loginError()) {
+          <p id="mensajeLoginError" class="errorTexto loginErrorTexto">{{ loginError() }}</p>
+        }
+
+        <div class="ClassAgentePrompt" name="DivAgentePrompt" id="AgentePrompt" [formGroup]="loginForm">
+
               <label for="inputAgentPrompt"
                   id="lblAgentPrompt"
                   class="miLabelStyle1">
-                Mensaje al agente
+                Agente Ollama (ventana 1)
                 <span id="errorAgentPrompt"
                     class="error">
-                    @if (agentPromptControl.invalid && (submitted || agentPromptControl.touched)) {*}
+                    @if (ollamaPromptControl.invalid && (submitted || ollamaPromptControl.touched)) {*}
                 </span>
               </label>
 
               <textarea
-                name="agentPrompt"
+                name="ollamaPrompt"
                 id="inputAgentPrompt"
                 class="RoundedRectangle TxtStyleCaptura"
-                formControlName="agentPrompt"
+                formControlName="ollamaPrompt"
                 rows="3"
               ></textarea>
 
@@ -135,26 +203,27 @@ de Visual Studio Code. -->
                 type="button"
                 id="botonAgente"
                 class="BotN"
-                (click)="enviarAlAgente()"
-                [disabled]="agentLoading()"
+                (click)="enviarAOllama()"
+                [disabled]="ollamaLoading()"
               >
-                @if (agentLoading()) {
+                @if (ollamaLoading()) {
                   Consultando...
                 } @else {
-                  Probar agente
+                  Probar agente Ollama
                 }
               </button>
 
               <div id="agentRespuesta" class="agentRespuesta">
-                @if (agentError()) {
-                  <p class="errorTexto">{{ agentError() }}</p>
+                @if (ollamaError()) {
+                  <p class="errorTexto">{{ ollamaError() }}</p>
                 }
-                @if (agentReply()) {
-                  <p>{{ agentReply() }}</p>
+                @if (ollamaReply()) {
+                  <p>{{ ollamaReply() }}</p>
                 }
               </div>
 
-          </form>
+        </div>
+      }
     </div>
 </section>
 
