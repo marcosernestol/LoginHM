@@ -97,7 +97,7 @@
 
  .Rectangle20{
   width: 627px;
-  height: 650px;
+  height: 512px;
   left: 0px;
   top: 0px;
   position: absolute;
@@ -351,11 +351,9 @@
 }
 
 #botonGoogleAgente {
-     position: relative;
-     left: 85px;
-    width: 380px;
+    width: 320px;
     height: 64px;
-    font-size: 34px;
+    font-size: 28px;
 }
 
 #googleAgentRespuesta {
@@ -372,6 +370,6 @@
 
 #botonCerrarSesion {
     width: 340px;
-    height: 64px;
+    height: 78px;
     font-size: 34px;
 }
