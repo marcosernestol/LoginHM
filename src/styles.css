@@ -2,7 +2,6 @@
 @import "../global_css/Sakura_css/normalize.css";
 @import "../global_css/Sakura_css/sakura.css";
 
-
 @import "../global_css/simple_css/simple.css";
 @import "../global_css/simple_css/simple-v1.css";
 
@@ -22,9 +21,6 @@
 @import "../global_css/Pico_css/pico.lime.css";
 @import "../global_css/Pico_css/pico.pink.css";
 @import "../global_css/Pico_css/pico.sand.css";
-
-
-
  */
 /* You can add global styles to this file, and also import other style files */
 /* Nota importante: La regla @importdebe ir siempre en la primera línea de tu archivo CSS para que funcione correctament */

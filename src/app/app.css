@@ -142,10 +142,10 @@
 
   #AgentePrompt{
      position: absolute;
-    width: 1000px;
+    width: 100px;
     height: 1000px;
-    left: 800px;
-    top: 0px;
+    left: 700px;
+    top: -350px;
 }
 
 /* #divFoto{
@@ -284,9 +284,9 @@
 
  #botonAgente {
      position: absolute;
-     width: 250px;
+     width: 450px;
      height: 65px;
-     left: 83px;
+     left: 100px;
      top: 525px;
      font-size: 30px;
  }
@@ -296,7 +296,8 @@
      left: 83px;
      top: 605px;
      width: 460px;
-     min-height: 80px;
+     min-height: 200px;
+     max-height: 370px;
      background: #ffffff;
      border: 1px solid rgba(0, 0, 0, 0.2);
      border-radius: 12px;
