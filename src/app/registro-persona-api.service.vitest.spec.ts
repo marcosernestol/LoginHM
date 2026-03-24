@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { RegistroPersonaApiService } from './registro-persona-api.service';
 import { ProbarElDoble } from './probar-el-doble';
 
-describe('RegistroPersonaApiService (Jest)', () => {
+describe('RegistroPersonaApiService (Vitest)', () => {
   let service: RegistroPersonaApiService;
   let httpMock: HttpTestingController;
 
@@ -22,14 +23,14 @@ describe('RegistroPersonaApiService (Jest)', () => {
     httpMock.verify();
   });
 
-  it('should fetch active users from RegistroPersona endpoint', () => {
+  it('should fetch RegistroPersona data from API', () => {
     const mockResponse = {
       RegistroPersona: [
         {
-          id: 1,
-          usuario: 'usuario-demo',
-          email: 'demo@example.com',
-          password: 'secret123',
+          id: 10,
+          usuario: 'vitest-user',
+          email: 'vitest@example.com',
+          password: 'vitest123',
           activo: true,
         },
       ],
@@ -37,7 +38,7 @@ describe('RegistroPersonaApiService (Jest)', () => {
 
     service.getActivos().subscribe((response) => {
       expect(response.RegistroPersona).toHaveLength(1);
-      expect(response.RegistroPersona[0].usuario).toBe('usuario-demo');
+      expect(response.RegistroPersona[0].email).toBe('vitest@example.com');
     });
 
     const req = httpMock.expectOne('http://localhost:5999/api/RegistroPersona');
@@ -49,10 +50,12 @@ describe('RegistroPersonaApiService (Jest)', () => {
 
 
 //---------------------------------------------------------------
-// Aqui escribí mi prueba para Jest, a ver si me funciona.
-describe('Mi prueba Jest para ProbarElDoble', () => {
+// Aqui escribí mi prueba para Vitest, a ver si me funciona.
+describe('Mi prueba Vitest para ProbarElDoble', () => {
   it('Debe retornar el doble del numero dado', () => {
-    const resultado  = ProbarElDoble(5);
-    expect(resultado).toBe(10);
+    const resultado  = ProbarElDoble(2);
+    expect(resultado).toBe(4);
   });
 });
+
+
