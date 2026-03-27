@@ -89,3 +89,54 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 >>  Para obtener más información sobre el uso de Angular CLI, incluyendo referencias detalladas de comandos, visite la página [Información general y referencia de comandos de Angular CLI](https://angular.dev/tools/cli)
+
+
+
+-------------------------------------------
+## Dockerizar LoginHM
+
+Esta configuración crea una imagen de producción optimizada:
+>>  This setup creates an optimized production image:
+
+1. Compila Angular dentro de un contenedor Node.
+2. Sirve los archivos estáticos con Nginx.
+3. Soporta rutas SPA usando fallback a `index.html`.
+
+### Opción 1: Docker Compose
+
+```bash
+docker compose up --build -d
+```
+
+Abrir en:
+>>  Open in:
+
+`http://localhost:8080`
+
+Para detener:
+>>  To stop:
+
+```bash
+docker compose down
+```
+
+### Opción 2: Docker CLI
+
+Construir imagen:
+>>  Build image:
+
+```bash
+docker build -t loginhm:latest .
+```
+
+Ejecutar contenedor:
+>>  Run container:
+
+```bash
+docker run --name loginhm-web -p 8080:80 --rm loginhm:latest
+```
+
+Abrir en:
+>>  Open in:
+
+`http://localhost:8080`

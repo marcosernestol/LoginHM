@@ -1,0 +1,20 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Build outputs
+/dist
+/.angular
+
+# VCS and editor
+.git
+.gitignore
+.vscode
+
+# Documentation and local files
+documentation
+README.md
+
+# OS artifacts
+.DS_Store
+Thumbs.db
