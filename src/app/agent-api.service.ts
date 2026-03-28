@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 interface AgentInvokeResponse {
   ok: boolean;
@@ -13,7 +14,7 @@ interface AgentInvokeResponse {
 @Injectable({ providedIn: 'root' })
 export class AgentApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:5999';
+  private readonly baseUrl = environment.apiBaseUrl;
 
   invokeOllama(message: string): Observable<AgentInvokeResponse> {
     return this.http.post<AgentInvokeResponse>(`${this.baseUrl}/api/agent/ollama/invoke`, {
