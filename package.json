@@ -1,6 +1,6 @@
 {
   "name": "login-hm",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -18,7 +18,20 @@
     "test:jest": "jest",
     "test:jest:watch": "jest --watch",
     "docs": "compodoc -p tsconfig.app.json",
-    "docs:serve": "compodoc -p tsconfig.app.json -s --host 127.0.0.1 -r 8090"
+    "docs:serve": "compodoc -p tsconfig.app.json -s --host 127.0.0.1 -r 8090",
+    "version:show": "node scripts/versioning.mjs show",
+    "version:sync": "node scripts/versioning.mjs sync",
+    "version:bump:patch": "npm version patch --no-git-tag-version && npm run version:sync",
+    "version:bump:minor": "npm version minor --no-git-tag-version && npm run version:sync",
+    "version:bump:major": "npm version major --no-git-tag-version && npm run version:sync",
+    "docker:tag": "node scripts/versioning.mjs tag",
+    "docker:tag:local": "node scripts/versioning.mjs tag local",
+    "docker:tag:dev": "node scripts/versioning.mjs tag development",
+    "docker:tag:prod": "node scripts/versioning.mjs tag production",
+    "release:prod": "node scripts/release-prod.mjs patch",
+    "release:prod:minor": "node scripts/release-prod.mjs minor",
+    "release:prod:major": "node scripts/release-prod.mjs major",
+    "release:prod:nodocker": "node scripts/release-prod.mjs patch --skip-docker"
   },
   "prettier": {
     "printWidth": 100,

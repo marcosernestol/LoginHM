@@ -113,6 +113,88 @@ Abrir en:
 
 `http://localhost:8080`
 
+
+-------------------------------------------
+## Versionado SemVer y Tags Docker
+
+La version base del proyecto vive en `package.json`.
+
+Ejemplos de version SemVer validas:
+- `1.0.1`
+- `1.0.2`
+- `1.1.0`
+- `2.0.0`
+
+### Ver version actual
+
+```bash
+npm run version:show
+```
+
+### Incrementar version
+
+```bash
+npm run version:bump:patch
+npm run version:bump:minor
+npm run version:bump:major
+```
+
+Estos comandos:
+1. Actualizan la version en `package.json`.
+2. Sincronizan `appVersion` y `appVersionTag` en los ambientes Angular:
+	- `local` -> `1.0.1-local`
+	- `development` -> `1.0.1-dev`
+	- `production` -> `1.0.1-prod`
+
+### Sincronizar version sin incrementar
+
+```bash
+npm run version:sync
+```
+
+### Obtener tags Docker sugeridos
+
+```bash
+npm run docker:tag:local
+npm run docker:tag:dev
+npm run docker:tag:prod
+```
+
+### Reusar version en Docker Compose
+
+`docker-compose.yml` ya acepta la variable `APP_VERSION` para:
+- tag de imagen: `login-hm:${APP_VERSION}`
+- label OCI en Dockerfile: `org.opencontainers.image.version`
+
+Ejemplo:
+
+```bash
+set APP_VERSION=1.0.1-prod
+docker compose up --build -d
+```
+
+### Release productivo en un solo comando
+
+Script recomendado:
+
+```bash
+npm run release:prod
+```
+
+Este comando hace:
+1. `patch` SemVer (ejemplo: `1.0.1` -> `1.0.2`).
+2. Sincroniza `appVersion` y `appVersionTag` en `environment*.ts`.
+3. Compila Angular en `production`.
+4. Construye imagen Docker con tag `login-hm:<version>-prod`.
+
+Variantes:
+
+```bash
+npm run release:prod:minor
+npm run release:prod:major
+npm run release:prod:nodocker
+```
+
 Para detener:
 >>  To stop:
 

@@ -1,9 +1,12 @@
 services:
   loginhm:
+    image: login-hm:${APP_VERSION:-latest}
     container_name: loginhm-web
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        APP_VERSION: ${APP_VERSION:-0.0.0}
     ports:
       - "8080:80"
     restart: unless-stopped

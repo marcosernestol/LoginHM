@@ -11,6 +11,9 @@ RUN npm run build
 
 FROM nginx:1.27-alpine AS runtime
 
+ARG APP_VERSION=0.0.0
+LABEL org.opencontainers.image.version=$APP_VERSION
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/LoginHM/browser /usr/share/nginx/html
 
